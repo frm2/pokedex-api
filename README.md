@@ -1,2 +1,2 @@
 # pokedex-api
-PokedexAPI is a database of pokémon using mongodb, typescipt, and nodejs
+PokedexAPI is a database of pokémon using Mongodb, Typescript, and NodeJS.

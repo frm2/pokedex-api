@@ -1,0 +1,31 @@
+{
+  "name": "pokedex-api",
+  "version": "1.0.0",
+  "description": "PokedexAPI is a database of pokémon using mongodb, typescipt, and nodejs",
+  "main": "index.js",
+  "scripts": {
+    "build": "rm -rf build/ && tsc",
+    "start": "node buld/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/frm2/pokedex-api.git"
+  },
+  "author": "fernando-rangel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/frm2/pokedex-api/issues"
+  },
+  "homepage": "https://github.com/frm2/pokedex-api#readme",
+  "dependencies": {
+    "chalk": "^5.0.1",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "joi": "^17.6.0",
+    "mongoose": "^6.4.4"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "typescript": "^4.7.4"
+  }
+}
