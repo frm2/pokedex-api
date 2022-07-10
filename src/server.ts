@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 import config from '../config/config';
 import express from 'express';
 import http from 'http';
+import pkmnRoutes from '../src/routes/Pokemon';
 
 const router = express();
 
@@ -29,9 +30,17 @@ const server = () => {
                 `IP: [${req.ip}] STATUS: [${res.statusCode} - ${res.statusMessage}]`
             );
         });
+
         next();
     });
 
+    router.use(express.urlencoded({ extended: true }));
+    router.use(express.json());
+
+    //Routes (contains the routes for the functions)
+    router.use('/pkmn', pkmnRoutes);
+
+    //Creating the server with the functions added to the router
     http.createServer(router).listen(config.server.port, () => {
         console.log(`Server is now running - PORT [${config.server.port}]`);
     });
