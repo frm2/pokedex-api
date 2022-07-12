@@ -1,5 +1,7 @@
 # Custom Ignores
 .prettierrc
+/.vscode/
+/.vscode/**
 
 # Logs
 logs
