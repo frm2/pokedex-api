@@ -22,26 +22,26 @@ export interface ISpeciesModel extends Document {
         gen34: [{ name: string; method: string }];
     };
     damages: {
-        normal: string;
-        fire: string;
-        water: string;
-        electric: string;
-        grass: string;
-        ice: string;
-        fight: string;
-        poison: string;
-        ground: string;
-        flying: string;
-        psychic: string;
-        bug: string;
-        rock: string;
-        ghost: string;
-        dragon: string;
-        dark: string;
-        steel: string;
+        normal: number;
+        fire: number;
+        water: number;
+        electric: number;
+        grass: number;
+        ice: number;
+        fight: number;
+        poison: number;
+        ground: number;
+        flying: number;
+        psychic: number;
+        bug: number;
+        rock: number;
+        ghost: number;
+        dragon: number;
+        dark: number;
+        steel: number;
     };
     misc: {
-        sexChance: {
+        sex: {
             male: number;
             female: number;
         };
@@ -60,6 +60,8 @@ export interface ISpeciesModel extends Document {
     evpoints: [string];
     fleeflag: number;
     entreeforestlevel: number;
+    egggroup: [string];
+    baby: string;
 }
 
 const SpeciesSchema: Schema = new Schema({
@@ -102,7 +104,12 @@ const SpeciesSchema: Schema = new Schema({
                 'Dark',
                 'Steel'
             ],
-            required: true
+            required: true,
+            validator: {
+                validator(types: [String]) {
+                    return types.length in [1, 2]; //there has to be either 1 or 2 types
+                }
+            }
         }
     ],
     stats: {
@@ -199,150 +206,163 @@ const SpeciesSchema: Schema = new Schema({
                     required: true
                 }
             }
-        ],
-        damages: {
-            normal: {
-                type: Number,
-                required: true
-            },
-            fire: {
-                type: Number,
-                required: true
-            },
-            water: {
-                type: Number,
-                required: true
-            },
-            electric: {
-                type: Number,
-                required: true
-            },
-            grass: {
-                type: Number,
-                required: true
-            },
-            ice: {
-                type: Number,
-                required: true
-            },
-            fight: {
-                type: Number,
-                required: true
-            },
-            poison: {
-                type: Number,
-                required: true
-            },
-            ground: {
-                type: Number,
-                required: true
-            },
-            flying: {
-                type: Number,
-                required: true
-            },
-            psychic: {
-                type: Number,
-                required: true
-            },
-            bug: {
-                type: Number,
-                required: true
-            },
-            rock: {
-                type: Number,
-                required: true
-            },
-            ghost: {
-                type: Number,
-                required: true
-            },
-            dragon: {
-                type: Number,
-                required: true
-            },
-            dark: {
-                type: Number,
-                required: true
-            },
-            steel: {
-                type: Number,
-                required: true
-            }
-        },
-        misc: {
-            sexchance: {
-                male: {
-                    type: Number,
-                    required: true
-                },
-                female: {
-                    type: Number,
-                    required: true
-                }
-            },
-            abilities: {
-                normal: {
-                    type: [
-                        {
-                            type: String,
-                            required: true
-                        }
-                    ],
-                    required: true
-                },
-                hidden: {
-                    type: [
-                        {
-                            type: String,
-                            required: true
-                        }
-                    ],
-                    required: true
-                }
-            }
-        },
-        classification: {
+        ]
+    },
+    damages: {
+        normal: {
             type: Number,
             required: true
         },
-        height: {
+        fire: {
             type: Number,
             required: true
         },
-        weight: {
+        water: {
             type: Number,
             required: true
         },
-        capturerate: {
+        electric: {
             type: Number,
             required: true
         },
-        eggsteps: {
+        grass: {
             type: Number,
             required: true
         },
-        expgrowth: {
+        ice: {
             type: Number,
             required: true
         },
-        happiness: {
+        fight: {
             type: Number,
             required: true
         },
-        evpoints: {
-            type: [String],
-            required: true
-        },
-        fleeflag: {
+        poison: {
             type: Number,
             required: true
         },
-        entreeforestlevel: {
+        ground: {
+            type: Number,
+            required: true
+        },
+        flying: {
+            type: Number,
+            required: true
+        },
+        psychic: {
+            type: Number,
+            required: true
+        },
+        bug: {
+            type: Number,
+            required: true
+        },
+        rock: {
+            type: Number,
+            required: true
+        },
+        ghost: {
+            type: Number,
+            required: true
+        },
+        dragon: {
+            type: Number,
+            required: true
+        },
+        dark: {
+            type: Number,
+            required: true
+        },
+        steel: {
             type: Number,
             required: true
         }
-    }
+    },
+    misc: {
+        sex: {
+            male: {
+                type: Number,
+                required: true
+            },
+            female: {
+                type: Number,
+                required: true
+            }
+        },
+        abilities: {
+            normal: {
+                type: [
+                    {
+                        type: String,
+                        required: true
+                    }
+                ],
+                required: true
+            },
+            hidden: {
+                type: [
+                    {
+                        type: String,
+                        required: true
+                    }
+                ],
+                required: true
+            }
+        }
+    },
+    classification: {
+        type: Number,
+        required: true
+    },
+    height: {
+        type: Number,
+        required: true
+    },
+    weight: {
+        type: Number,
+        required: true
+    },
+    capturerate: {
+        type: Number,
+        required: true
+    },
+    eggsteps: {
+        type: Number,
+        required: true
+    },
+    expgrowth: {
+        type: Number,
+        required: true
+    },
+    happiness: {
+        type: Number,
+        required: true
+    },
+    evpoints: {
+        type: [String],
+        required: true
+    },
+    fleeflag: {
+        type: Number,
+        required: true
+    },
+    entreeforestlevel: {
+        type: Number,
+        required: true
+    },
+    egggroup: [
+        {
+            type: String,
+            required: true,
+            validator: {
+                validator(egggroup: [String]) {
+                    return egggroup.length in [1, 2];
+                    //there has to be either 1 or 2 egg groups
+                }
+            }
+        }
+    ]
+    //offspring: { type: Schema.Types.ObjectId, required: true, ref: 'Species' }
 });
 
 export default mongoose.model<ISpeciesModel>('Species', SpeciesSchema);
